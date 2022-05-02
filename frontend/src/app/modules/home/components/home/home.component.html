@@ -1,0 +1,23 @@
+<h3>Mi dispositivos</h3>
+<ng-container *ngIf="dispositivos;else errorMessageTp">
+    <table>
+        <caption>Dispositivos</caption>
+        <tr>
+          <th>Dispositivo ID</th>
+          <th>Nombre</th>
+          <th>Ubicación</th>
+          <th>ElectroVálvula</th>
+          <th>Editar</th>
+        </tr>
+        <tr *ngFor="let dispositivo of dispositivos">
+            <td>{{dispositivo.dispositivoId}}</td>
+            <td>{{dispositivo.nombre}}</td>
+            <td>{{dispositivo.ubicacion}}</td>
+            <td>{{dispositivo.electrovalvulaId}}</td>
+            <td><button type="button" (click)="onGoToDispositivo(dispositivo.dispositivoId,dispositivo.electrovalvulaId)">Editar </button></td>
+        </tr>
+      </table>
+</ng-container>
+<ng-template #errorMessageTp>
+    <p>{{errorMessage}}</p>
+</ng-template>

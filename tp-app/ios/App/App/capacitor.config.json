@@ -1,0 +1,6 @@
+{
+	"appId": "ionic.dam.com",
+	"appName": "tp-app",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

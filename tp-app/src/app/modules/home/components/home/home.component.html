@@ -1,0 +1,47 @@
+<h3>Mi dispositivos</h3>
+<ng-container *ngIf="dispositivos;else errorMessageTp">
+
+        <caption>Dispositivos</caption>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <div>Dispositivo ID</div>
+            </ion-col>
+            <ion-col>
+              <div>Nombre</div>
+            </ion-col>
+            <ion-col>
+              <div>Ubicación</div>
+            </ion-col>
+            <ion-col>
+              <div>ElectroVálvula</div>
+            </ion-col>
+            <ion-col>
+              <div>Ver</div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngFor="let dispositivo of dispositivos">
+            <ion-col>
+              <div>{{dispositivo.dispositivoId}}</div>
+            </ion-col>
+            <ion-col>
+              <div>{{dispositivo.nombre}}</div>
+            </ion-col>
+            <ion-col>
+              <div>{{dispositivo.ubicacion}}</div>
+            </ion-col>
+            <ion-col>
+              <div>{{dispositivo.electrovalvulaId}}</div>
+            </ion-col>
+            <ion-col>
+              <div><ion-button color="danger" type="button" (click)="onGoToDispositivo(dispositivo.dispositivoId,dispositivo.electrovalvulaId)">ver </ion-button></div>
+             </ion-col>
+          </ion-row>
+
+        </ion-grid>
+
+</ng-container>
+<ng-template #errorMessageTp>
+    <p>{{errorMessage}}</p>
+</ng-template>

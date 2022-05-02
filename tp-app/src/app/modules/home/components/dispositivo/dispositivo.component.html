@@ -1,0 +1,76 @@
+<h3>Dispositivo {{dispoId || 'No data'}}</h3>
+<!--Ultima medicion-->
+<section>
+    <p>Última medición: {{lastMedicion.valor | unidades}}</p>
+</section>
+<!--Abrir o cerrar la electroválvula-->
+<section>
+    <div style="margin-bottom: 20px;">
+        <p>Electroválvula: {{electroValvula}}</p>
+        <input type="text" [(ngModel)]="medicionValue" name="medicion" [disabled]="disableMedicion">
+    </div>
+    <div>
+        <button type="button" (click)="onAbrirValvula()">Abrir</button>
+        <button type="button" (click)="onCerrarValvula()">Cerrar</button>
+    </div>
+</section>
+<!--mediciones-->
+<div id="highcharts" style="width: 100%; height: 300px;"></div>
+<div>
+    <button type="button" (click)="onVerMediciones()">Ver Mediciones</button>
+</div>
+<ng-container *ngIf="verMediciones">
+    <ng-container *ngIf=" data && data.mediciones.length>0;else errorMedicionesTp ">
+        <table>
+            <caption>Mediciones</caption>
+            <tr>
+              <th>medicionId</th>
+              <th>fecha</th>
+              <th>valor</th>
+              <th>dispositivoId</th>
+            </tr>
+            <tr *ngFor="let medicion of data.mediciones">
+                <td>{{medicion.medicionId}}</td>
+                <td>{{medicion.fecha}}</td>
+                <td appStyleCell [measureValue]="+medicion.valor" >{{medicion.valor}}</td>
+                <td>{{medicion.dispositivoId}}</td>
+            </tr>
+          </table>
+        <div>
+            <button type="button" (click)="onCerrarMediciones()">Cerrar Mediciones</button>
+        </div>
+    </ng-container>
+    <ng-template #errorMedicionesTp>
+        <p>No existen mediciones para este dispositivo</p>
+    </ng-template>
+</ng-container>
+<!--Riegos-->
+<hr style="margin-top: 20px;margin-bottom: 20px;">
+<div>
+    <button type="button" (click)="onVerRiegos()">Ver Riegos</button>
+</div>
+<ng-container *ngIf="verRiegos">
+    <ng-container *ngIf="data && data.riegos.length>0;else errorRiegosTp">
+        <table>
+            <caption>Riegos</caption>
+            <tr>
+              <th>logRiegoId</th>
+              <th>apertura</th>
+              <th>fecha</th>
+              <th>electrovalvulaId</th>
+            </tr>
+            <tr *ngFor="let riego of data.riegos">
+                <td>{{riego.logRiegoId}}</td>
+                <td>{{riego.apertura}}</td>
+                <td>{{riego.fecha}}</td>
+                <td>{{riego.electrovalvulaId}}</td>
+            </tr>
+          </table>
+        <div>
+            <button type="button" (click)="onCerrarRiegos()">Cerrar Mediciones</button>
+        </div>
+    </ng-container>
+    <ng-template #errorRiegosTp>
+        <p>No existen registros en el log de riegos para este dispositivo</p>
+    </ng-template>
+</ng-container>
